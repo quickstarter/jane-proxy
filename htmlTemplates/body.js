@@ -1,10 +1,13 @@
-module.exports = ({}) => {
-<div id="application">
-<div id="Summary"></div>
-<div id="Navbar"></div>
-<div id="Campaign"></div>
-<div id="Updates" class="hidden"></div>
-<div id="Comments" class="hidden"></div>
-<div id="Community" class="hidden"></div>
-</div>
-}
+const React = require('react')
+
+const ReactDOMServer = require ('react-dom/server');
+
+
+module.exports = (components, id) => (
+`<div id="application">
+  ${components.map((component) => 
+   `<div id="${component.name}">${ReactDOMServer.renderToString(React.createElement(component.react, {projectId: id}))}</div>`
+  ).join('/n')}
+</div>`
+)
+
